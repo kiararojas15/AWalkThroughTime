@@ -1,4 +1,3 @@
-
 let grid;
 let spacing = 20;
 let cols, rows;
@@ -18,10 +17,10 @@ function preload() {
  }
 
 function mousePressed() {
-  if (!song.isPlaying()) {
-    song.loop();
-  }
+  cnv.elt.focus();  
+  if (!song.isPlaying()) song.loop();
 }
+
 
 function make3DArray(cols, rows, depth) {
   let arr = new Array(cols);
@@ -36,8 +35,7 @@ function make3DArray(cols, rows, depth) {
 
 function setup() {
   cnv = createCanvas(windowWidth, windowHeight, WEBGL);
-    cnv.elt.tabIndex = 0;  
-    cnv.elt.focus(); 
+    cnv.elt.tabIndex = 0;   
   cols = floor(width / spacing);
   rows = floor(height / spacing);
   depth = cols;
@@ -155,12 +153,6 @@ function draw() {
   point(spot.x, spot.y, spot.z);
 }
 
-function keyPressed() {
-  if (key === 'k' || key === 'K') {
-    save();
-  }
-}
-
 function resetSketch() {
   path = [];
   grid = make3DArray(cols, rows, depth);
@@ -183,6 +175,13 @@ function resetSketch() {
 }
 
 function keyPressed() {
+
+  // save image
+  if (key === 'k' || key === 'K') {
+    save();
+  }
+
+  // restart
   if (key === ' ') {
     resetSketch();
   }
